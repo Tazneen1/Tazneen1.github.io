@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css2?family=Port+Lligat+Slab&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap" rel="stylesheet">
+<head>
+  <title>Tazneen S</title>
+  <style>
+    h1 {
+      text-align: center;
+      font-family: "Port Lligat Slab", serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 20px 10px 0 20px;
+    }
+    img {
+      position: center;
+    }
+    body {
+      text-align: center;
+      background: url("https://www.hillintl.com/wp-content/uploads/2021/03/World-Trade-Center-4-1920x0-c-default.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #EDA6E8;
+      font-family: baskerville;
+    }
+    p {
+      font-size: 22px;
+      background-color: purple;
+      font-family: "Edu AU VIC WA NT Hand", cursive;
+      text-align:center;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+    }
+    input {
+      border: 0;
+      padding: 10px;
+      font-size: 20px;
+      font-family: "Port Lligat Slab", serif;
+  font-weight: 400;
+  font-style: normal;
+    }
+    input[type="submit"] {
+      background: purple;
+      color: #E8D3FF;
+
+    }
+    @media (max-width: 500px) {
+      p {
+        font-size: 15px;
+      }
+      body {
+        background-position: center;
+      }
+    }
+  </style>
+</head>
+<h1> Welcome to My Page!</h1>
+<body>
+  <img src="https://png.pngtree.com/recommend-works/png-clipart/20240716/ourmid/pngtree-hijab-woman-cartoon-png-image_13079532.png">
+  <p>Hey, I'm Tazneen, a current student at JGS and an aspiring architect.
+  Feel free to reach out!</p>
+ <input id="Name" type="name" placeholder="Your name">
+ <input id="Email" type="email" placeholder="Your email">
+  <input id="submit" type="Submit">
+  
+  
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+  
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDTujyNHCMl33uR4xcmSiqB7qQtX3RVAU4",
+    authDomain: "dash-project-efd62.firebaseapp.com",
+    projectId: "dash-project-efd62",
+    storageBucket: "dash-project-efd62.firebasestorage.app",
+    messagingSenderId: "997637357580",
+    appId: "1:997637357580:web:57188b4a4d50a749a12e29"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  
+const Name = document.querySelector("#Name") 
+const Email = document.querySelector("#Email")
+document.querySelector('#submit').addEventListener('click', Submit)
+
+function Submit() {
+  const timestamp = buildTimestamp()
+  
+  set(ref(db, timestamp), {
+	  Name: Name.value,
+      email: Email.value,
+  });
+
+  Name.value = ""
+  Email.value = ""
+}
+
+function buildTimestamp() {
+  const now = new Date();
+  let timestamp = now.getFullYear().toString() + "/";
+  //const month = now.toLocaleString('default', { month: 'long' });
+
+  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+  month = month.toString()
+  month = addLeadingZero(month)
+  timestamp += month + "/"; 
+
+  let date = now.getDate().toString()
+  date = addLeadingZero(date)
+  timestamp += date + "/";
+
+  let hours = now.getHours().toString()
+  hours = addLeadingZero(hours)
+  timestamp += hours + ":";
+
+  let minutes = now.getMinutes().toString()
+  minutes = addLeadingZero(minutes)
+  timestamp += minutes + ":";
+
+  let seconds = now.getSeconds().toString()
+  seconds = addLeadingZero(seconds)
+  timestamp += seconds;
+
+  return timestamp
+}
+
+function addLeadingZero(units) {
+	if (units.length < 2) {
+		units = "0" + units
+	}
+	return units
+}
+
+</script>
+	
+</body>
